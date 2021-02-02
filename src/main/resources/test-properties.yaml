@@ -1,0 +1,6 @@
+http:
+  port: "8081"
+  path: "/api/events"
+kafka:
+  server: "localhost:9092"
+  topic: <YOUR TOPIC NAME>

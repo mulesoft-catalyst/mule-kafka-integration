@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:kafka="http://www.mulesoft.org/schema/mule/kafka"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/kafka http://www.mulesoft.org/schema/mule/kafka/current/mule-kafka.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="producerFlow" doc:id="b4ce01c9-5062-49e5-8d79-de2310a001b9" >
+		<http:listener doc:name="Listener" doc:id="448b9083-f597-4e8a-a2f8-a55691e77ded" config-ref="HTTP_Listener_config" path="${http.path}" allowedMethods="POST"/>
+		<kafka:publish doc:name="Publish" doc:id="65a0585e-d770-49d2-9d44-58155a004667" config-ref="Apache_Kafka_Producer_configuration" topic="${kafka.topic}" key="#[now()]"/>
+		<ee:transform doc:name="Transform Message" doc:id="353e72c2-6370-4b6c-aace-1408f2585c4b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

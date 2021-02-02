@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:kafka="http://www.mulesoft.org/schema/mule/kafka" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/kafka http://www.mulesoft.org/schema/mule/kafka/current/mule-kafka.xsd">
+	<flow name="consumerFlow" doc:id="a8da4251-4aa5-450c-acb3-18962d055010" >
+		<kafka:message-listener doc:name="Message listener" doc:id="7e16afa4-4928-4c11-b576-5d5237dad654" config-ref="Apache_Kafka_Consumer_configuration" ackMode="AUTO"/>
+		<logger level="INFO" doc:name="Logger" doc:id="11bb7b4b-986e-4f8e-b880-f27a6e7a09fd" message="#[payload]"/>
+	</flow>
+</mule>
